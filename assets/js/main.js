@@ -249,7 +249,7 @@ function renderDynamicContent(config) {
     // Google Calendar Link Setup
     const btnCalendar = document.getElementById('btnAddToCalendar');
     if (btnCalendar && config.acara) {
-        const eventTitle = encodeURIComponent(config.acara.jenis || 'Resepsi Metatah');
+        const eventTitle = encodeURIComponent(config.acara.jenis || 'Pawiwahan & Mepandes');
         const eventDesc = encodeURIComponent(config.acara.deskripsi || 'Undangan Acara');
         const eventLoc = encodeURIComponent(config.acara.tempat || 'Bali');
         

@@ -133,7 +133,7 @@ const UNDANGAN_CONFIG = {
             nama: "Keluarga Besar & Sahabat",
             kehadiran: "Hadir",
             waktu: "1 jam yang lalu",
-            pesan: "Selamat menempuh upacara Manusa Yadnya Metatah. Semoga dilimpahi kerahayuan, kebijaksanaan, dan kelancaran acara."
+            pesan: "Selamat menempuh upacara Manusa Yadnya Pawiwahan & Mepandes. Semoga dilimpahi kerahayuan, kebijaksanaan, dan kelancaran acara."
         },
         {
             nama: "Sahabat & Kerabat",
