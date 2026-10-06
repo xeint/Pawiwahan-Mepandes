@@ -84,11 +84,11 @@ const UNDANGAN_CONFIG = {
         autoPlayOnOpen: true
     },
 
-    // Video Dokumentasi / Cinematic (Link YouTube Acara)
+    // Video Dokumentasi / Cinematic (File Video Lokal)
     video: {
         aktif: true,
-        tipe: "youtube",
-        src: "https://youtu.be/vcYeqqPk7vs",
+        tipe: "local",
+        src: "assets/videos/Video Prewed.mp4",
         poster: "assets/images/photos/NAS_7364.JPEG",
         judul: "Video Momen Pawiwahan & Mepandes"
     },

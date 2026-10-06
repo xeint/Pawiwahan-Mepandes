@@ -273,13 +273,16 @@
                 <img src="assets/images/ornaments/daun-2.png" alt="Daun Bali" class="video-leaf-bottom-left">
 
                 <div class="video-wrapper" id="videoWrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/vcYeqqPk7vs?rel=0&modestbranding=1" 
-                        title="Video Momen Pawiwahan & Mepandes" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
+                    <video id="momenVideo" class="video-player" controls preload="metadata" poster="assets/images/photos/NAS_7364.JPEG" playsinline>
+                        <source src="assets/videos/Video Prewed.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung pemutar video.
+                    </video>
+                    <div class="video-play-overlay" id="videoPlayOverlay">
+                        <button type="button" class="btn-video-play" id="btnVideoPlay" aria-label="Putar Video">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <span class="video-play-label">Putar Video Momen</span>
+                    </div>
                 </div>
             </div>
         </div>
