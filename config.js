@@ -84,17 +84,18 @@ const UNDANGAN_CONFIG = {
         autoPlayOnOpen: true
     },
 
-    // Video Dokumentasi / Cinematic (Bisa File MP4 lokal atau Link YouTube)
+    // Video Dokumentasi / Cinematic (Link YouTube Acara)
     video: {
         aktif: true,
-        tipe: "local", // "local" untuk file mp4 di assets/videos, atau "youtube" untuk link YouTube
-        src: "assets/videos/video-momen.mp4", // Isi dengan path file video atau link YouTube (misal: "https://www.youtube.com/watch?v=...")
-        poster: "assets/images/photos/NAS_7364.JPEG", // Foto thumbnail pembuka video
-        judul: "Video Dokumentasi Momen Bahagia"
+        tipe: "youtube",
+        src: "https://youtu.be/vcYeqqPk7vs",
+        poster: "assets/images/photos/NAS_7364.JPEG",
+        judul: "Video Momen Pawiwahan & Mepandes"
     },
 
-    // Galeri Foto (Semua Momen Dokumentasi Upacara)
+    // Galeri Foto (Semua Momen Dokumentasi Upacara, Klasik, & Kasual)
     galeri: [
+        // Koleksi Utama
         { src: "assets/images/photos/edit-7600.JPEG", caption: "Kebersamaan Keluarga - Upacara Yadnya" },
         { src: "assets/images/photos/NAS_7404.JPEG", caption: "Momen Bahagia Mempelai" },
         { src: "assets/images/photos/edit-7417.JPEG", caption: "Dokumentasi Upacara Pawiwahan" },
@@ -109,7 +110,30 @@ const UNDANGAN_CONFIG = {
         { src: "assets/images/photos/NAS_7241.JPEG", caption: "Dokumentasi Acara" },
         { src: "assets/images/photos/NAS_7323.JPEG", caption: "Momen Bahagia" },
         { src: "assets/images/photos/NAS_7434.JPEG", caption: "Rangkaian Prosesi Yadnya" },
-        { src: "assets/images/photos/NAS_7219.JPEG", caption: "Tradisi & Budaya Bali" }
+        { src: "assets/images/photos/NAS_7219.JPEG", caption: "Tradisi & Budaya Bali" },
+
+        // Tambahan Klasik
+        { src: "assets/images/photos/TAMBAHAN KLASIK/edit-7356.jpeg", caption: "Momen Klasik Tradisional" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/edit-7399.jpeg", caption: "Potret Busana Adat Bali" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/edit-7550.jpeg", caption: "Kehangatan Upacara Yadnya" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7228.jpg", caption: "Rangkaian Mepandes" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7364.jpg", caption: "Pesona Adat Bali" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7370.jpg", caption: "Potret Kebersamaan" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7434.jpg", caption: "Dokumentasi Prosesi" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7496.jpg", caption: "Momen Sakral Tradisional" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7539.jpg", caption: "Kebersamaan Mempelai" },
+        { src: "assets/images/photos/TAMBAHAN KLASIK/NAS_7545.jpg", caption: "Doa & Restu Tradisional" },
+
+        // Tambahan Casual
+        { src: "assets/images/photos/CASUAL/GNP09341.jpg", caption: "Momen Kasual Bahagia" },
+        { src: "assets/images/photos/CASUAL/GNP09390.jpg", caption: "Potret Kasual Mempelai" },
+        { src: "assets/images/photos/CASUAL/GNP09418.jpg", caption: "Keceriaan Bersama" },
+        { src: "assets/images/photos/CASUAL/GNP09476.jpg", caption: "Momen Kasual Romantis" },
+        { src: "assets/images/photos/CASUAL/GNP09499.jpg", caption: "Potret Kasual Bersama" },
+        { src: "assets/images/photos/CASUAL/GNP09519.jpg", caption: "Senyum Bahagia" },
+        { src: "assets/images/photos/CASUAL/GNP09524.jpg", caption: "Momen Manis Mempelai" },
+        { src: "assets/images/photos/CASUAL/GNP09535.jpg", caption: "Potret Kasual Bahagia" },
+        { src: "assets/images/photos/CASUAL/GNP09548.jpg", caption: "Kenangan Kasual Terindah" }
     ],
 
     // Rekening Amplop Digital / Tanda Kasih (1 Rekening Mandiri)

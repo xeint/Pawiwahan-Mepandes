@@ -228,7 +228,7 @@ function renderDynamicContent(config) {
         galleryTrack.innerHTML = config.galeri.map((item, idx) => `
             <div class="gallery-slide gallery-item" data-src="${item.src}" data-index="${idx}">
                 <div class="gallery-slide-card">
-                    <img src="${item.src}" alt="Dokumentasi ${idx + 1}" loading="lazy">
+                    <img src="${item.src}" alt="Dokumentasi ${idx + 1}" loading="${idx < 3 ? 'eager' : 'lazy'}" decoding="async">
                 </div>
             </div>
         `).join('');
