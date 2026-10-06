@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Nama Tamu Undangan | Undangan Digital Bali</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Generator link undangan digital dan pesan WhatsApp otomatis untuk mempermudah distribusi undangan digital.">
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Generator Stylesheet -->
+    <link rel="stylesheet" href="../assets/css/generator.css">
+</head>
+<body>
+
+    <div class="generator-container">
+        
+        <!-- Header -->
+        <div class="generator-header">
+            <span class="generator-badge"><i class="fas fa-magic"></i> Generator Tools</span>
+            <h1 class="generator-title">Generator Nama Tamu Undangan</h1>
+            <p class="generator-subtitle">Buat tautan undangan khusus dan format pesan WhatsApp siap kirim dengan mudah & cepat.</p>
+        </div>
+
+        <!-- Custom Base URL Config (Opsional jika ingin ganti domain) -->
+        <div class="gen-card" style="padding: 16px 20px; margin-bottom: 20px; background: #fffdfa; border-color: #f0e6d6;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <label for="customBaseUrl" style="font-size: 0.85rem; font-weight: 700; color: #8c6f55; text-transform: uppercase;">
+                        <i class="fas fa-globe"></i> Base URL Undangan:
+                    </label>
+                    <div style="font-size: 0.8rem; color: #718096;">Tautan utama website undangan Anda</div>
+                </div>
+                <div style="flex: 1 1 300px;">
+                    <input type="text" id="customBaseUrl" class="form-control" style="font-size: 0.85rem; padding: 8px 12px;" placeholder="http://127.0.0.1:8000/">
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tab-navigation">
+            <button type="button" class="tab-btn active" id="tabSingleBtn">
+                <i class="fas fa-user"></i> Satu Tamu (Single)
+            </button>
+            <button type="button" class="tab-btn" id="tabBulkBtn">
+                <i class="fas fa-users"></i> Banyak Tamu Sekaligus (Bulk)
+            </button>
+        </div>
+
+        <!-- ====================================================================
+             TAB 1: SINGLE GUEST GENERATOR
+             ==================================================================== -->
+        <div id="singleSection">
+            <div class="gen-card">
+                <form id="singleForm">
+                    <div class="form-group">
+                        <label for="guestName" class="form-label">
+                            <i class="fas fa-user-tag" style="color: var(--gen-primary);"></i> Nama Tamu Undangan:
+                        </label>
+                        <input type="text" id="guestName" class="form-control" placeholder="Contoh: Putu Ayu & Keluarga" required>
+                        <p class="form-hint">Nama ini akan otomatis tertera pada Sampul Pembuka dan Form RSVP undangan.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guestPhone" class="form-label">
+                            <i class="fab fa-whatsapp" style="color: #25d366;"></i> Nomor WhatsApp Tamu (Opsional):
+                        </label>
+                        <input type="text" id="guestPhone" class="form-control" placeholder="Contoh: 08123456789 (Kosongkan jika ingin memilih kontak manual)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="templateSelect" class="form-label">Pilihan Gaya Pesan WhatsApp:</label>
+                        <select id="templateSelect" class="form-select">
+                            <option value="bali" selected>🌿 Bahasa Bali (Om Swastyastu - Rahajeng)</option>
+                            <option value="formal">✉️ Bahasa Indonesia Formal (Kepada Yth...)</option>
+                            <option value="santai">🎉 Bahasa Santai / Sahabat (Halo! 👋)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Gunakan Format Teks Pengantar?</label>
+                        <div class="choice-group">
+                            <label class="choice-chip">
+                                <input type="radio" name="useIntro" value="ya" checked> Ya, sertakan teks pengantar
+                            </label>
+                            <label class="choice-chip">
+                                <input type="radio" name="useIntro" value="tidak"> Hanya link undangan saja
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-generate">
+                        <i class="fas fa-link"></i> Buat Link & Pesan WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <!-- Output Single Link -->
+            <div class="gen-card output-card" id="singleOutput">
+                <div class="output-header">
+                    <span class="output-title"><i class="fas fa-check-circle" style="color: #16a34a;"></i> Hasil Pesan & Link Undangan</span>
+                </div>
+
+                <div class="text-preview-box">
+                    <pre class="text-preview-content" id="previewText"></pre>
+                </div>
+
+                <div style="margin-bottom: 18px; font-size: 0.88rem;">
+                    <strong>Link Langsung:</strong> <a href="#" target="_blank" id="previewLinkText" class="link-highlight"></a>
+                </div>
+
+                <div class="output-actions">
+                    <a href="#" target="_blank" id="waShareBtn" class="btn-action btn-wa">
+                        <i class="fab fa-whatsapp fa-lg"></i> Kirim via WhatsApp
+                    </a>
+                    <button type="button" class="btn-action btn-copy" onclick="copyElementText('previewText', this)">
+                        <i class="fas fa-copy"></i> Salin Teks
+                    </button>
+                    <button type="button" class="btn-action btn-copy" onclick="copyElementText('previewLinkText', this)">
+                        <i class="fas fa-link"></i> Salin Link
+                    </button>
+                    <a href="#" target="_blank" id="previewLinkBtn" class="btn-action btn-preview-link">
+                        <i class="fas fa-external-link-alt"></i> Buka Undangan
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====================================================================
+             TAB 2: BULK GUEST GENERATOR (MULTI-TAMU)
+             ==================================================================== -->
+        <div id="bulkSection" style="display: none;">
+            <div class="gen-card">
+                <form id="bulkForm">
+                    <div class="form-group">
+                        <label for="bulkNames" class="form-label">
+                            <i class="fas fa-list-ol" style="color: var(--gen-primary);"></i> Daftar Nama Tamu (1 nama per baris):
+                        </label>
+                        <textarea id="bulkNames" rows="7" class="form-control" placeholder="Contoh:&#10;Nama Tamu 1 & Keluarga&#10;Nama Tamu 2&#10;Keluarga Besar Sahabat&#10;Bapak & Ibu Rekan Kerja&#10;dr. Nama Tamu, Sp.A" required></textarea>
+                        <p class="form-hint">Ketik atau salin daftar nama tamu dari Excel/Notepad, pisahkan setiap nama dengan baris baru (Enter).</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bulkTemplateSelect" class="form-label">Pilihan Gaya Pesan WhatsApp:</label>
+                        <select id="bulkTemplateSelect" class="form-select">
+                            <option value="bali" selected>🌿 Bahasa Bali (Om Swastyastu - Rahajeng)</option>
+                            <option value="formal">✉️ Bahasa Indonesia Formal (Kepada Yth...)</option>
+                            <option value="santai">🎉 Bahasa Santai / Sahabat (Halo! 👋)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Gunakan Format Teks Pengantar?</label>
+                        <div class="choice-group">
+                            <label class="choice-chip">
+                                <input type="radio" name="bulkUseIntro" value="ya" checked> Ya, sertakan teks pengantar
+                            </label>
+                            <label class="choice-chip">
+                                <input type="radio" name="bulkUseIntro" value="tidak"> Hanya link undangan saja
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-generate">
+                        <i class="fas fa-bolt"></i> Generate Semua Link Tamu
+                    </button>
+                </form>
+            </div>
+
+            <!-- Output Bulk Table -->
+            <div class="gen-card output-card" id="bulkOutput">
+                <div class="output-header">
+                    <div>
+                        <span class="output-title"><i class="fas fa-users-cog" style="color: #16a34a;"></i> Daftar Link Tamu Tergenerate</span>
+                        <span class="badge" id="bulkCountSpan" style="background: #e2e8f0; color: #334155; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; margin-left: 8px; font-weight: 600;"></span>
+                    </div>
+                    <button type="button" id="btnExportCsv" class="btn-action btn-preview-link" style="padding: 6px 14px; font-size: 0.82rem;">
+                        <i class="fas fa-file-csv"></i> Download CSV / Excel
+                    </button>
+                </div>
+
+                <div class="bulk-table-wrapper">
+                    <table class="bulk-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">No</th>
+                                <th>Nama Tamu</th>
+                                <th>Link Undangan</th>
+                                <th style="width: 170px;">Aksi Cepat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bulkTableBody">
+                            <!-- Populated dynamically via generator.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="generator-footer">
+            <p><a href="../index.html"><i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama Undangan</a></p>
+            <p style="margin-top: 6px;">&copy; 2026 Undangan Digital Bali. All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+    <!-- Generator Script -->
+    <script src="../assets/js/generator.js"></script>
+</body>
+</html>

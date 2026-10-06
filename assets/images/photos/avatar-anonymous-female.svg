@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f1ea" />
+      <stop offset="100%" stop-color="#dfd0c0" />
+    </linearGradient>
+    <linearGradient id="goldGradF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#8c6f55" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bgGradF)" />
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#goldGradF)" stroke-width="3" stroke-dasharray="8 6" opacity="0.6"/>
+  <!-- Balinese Motif Silhouette Female -->
+  <g fill="#8c6f55" opacity="0.85" transform="translate(0, 10)">
+    <!-- Hair Bun / Sanggul & Balinese Flower Crown -->
+    <ellipse cx="200" cy="115" rx="35" ry="25" fill="#6e543e"/>
+    <!-- Frangipani / Gold Floral Crown -->
+    <path d="M155 125 C175 105 225 105 245 125 C255 135 240 145 200 140 C160 145 145 135 155 125 Z" fill="url(#goldGradF)"/>
+    <circle cx="170" cy="115" r="8" fill="#ffd700"/>
+    <circle cx="200" cy="105" r="10" fill="#ffd700"/>
+    <circle cx="230" cy="115" r="8" fill="#ffd700"/>
+    <!-- Head -->
+    <circle cx="200" cy="165" r="44" />
+    <!-- Shoulders / Kebaya -->
+    <path d="M115 320 C115 250 155 225 200 225 C245 225 285 250 285 320 Z" />
+    <!-- Selendang Accent -->
+    <path d="M170 240 L230 240 L220 320 L180 320 Z" fill="url(#goldGradF)" opacity="0.7"/>
+  </g>
+</svg>

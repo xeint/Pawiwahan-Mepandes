@@ -1,0 +1,15 @@
+# Archives and large temporary downloads
+*.zip
+*.tar.gz
+*.rar
+
+# OS temporary files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/

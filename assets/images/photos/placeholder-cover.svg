@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%">
+  <defs>
+    <radialGradient id="coverRad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8f0" />
+      <stop offset="60%" stop-color="#ebdcc7" />
+      <stop offset="100%" stop-color="#c5a982" />
+    </radialGradient>
+    <linearGradient id="goldL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfc285" />
+      <stop offset="50%" stop-color="#b8934b" />
+      <stop offset="100%" stop-color="#7a5b30" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#coverRad)" />
+  <!-- Balinese Mandala / Candi Bentar Gate Silhouette -->
+  <g transform="translate(300, 300) scale(0.9)">
+    <circle cx="0" cy="0" r="230" fill="none" stroke="url(#goldL)" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
+    <circle cx="0" cy="0" r="210" fill="none" stroke="url(#goldL)" stroke-width="1.5" opacity="0.4"/>
+    <circle cx="0" cy="0" r="160" fill="none" stroke="url(#goldL)" stroke-width="3" opacity="0.7"/>
+
+    <!-- 8 Petal Lotus Motif -->
+    <g fill="none" stroke="url(#goldL)" stroke-width="2" opacity="0.75">
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(45)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(90)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(135)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(180)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(225)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(270)" fill="#b8934b" fill-opacity="0.15"/>
+      <path d="M0 0 C-40 -80 -40 -140 0 -180 C40 -140 40 -80 0 0 Z" transform="rotate(315)" fill="#b8934b" fill-opacity="0.15"/>
+    </g>
+
+    <!-- Center Icon: Om Swastyastu / Balinese Sacred Emblem -->
+    <circle cx="0" cy="0" r="45" fill="#8c6f55" />
+    <circle cx="0" cy="0" r="40" fill="url(#goldL)" />
+    <text x="0" y="14" font-family="'Cinzel', serif" font-size="42" font-weight="bold" fill="#fff" text-anchor="middle">🕉</text>
+  </g>
+</svg>

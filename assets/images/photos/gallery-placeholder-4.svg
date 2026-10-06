@@ -1,0 +1,16 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdfbf7" />
+      <stop offset="100%" stop-color="#ebdcc7" />
+    </linearGradient>
+  </defs>
+  <rect width="500" height="600" fill="url(#g4)" />
+  <rect x="25" y="25" width="450" height="550" rx="12" fill="none" stroke="#c5a059" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+  <g transform="translate(250, 270)" text-anchor="middle" fill="#8c6f55">
+    <circle cx="0" cy="0" r="55" fill="#f4efe6" stroke="#c5a059" stroke-width="2"/>
+    <text x="0" y="16" font-size="46">🪔</text>
+    <text x="0" y="90" font-family="'Alice', serif" font-size="22" font-weight="600">Prosesi Metatah</text>
+    <text x="0" y="120" font-family="'Inter', sans-serif" font-size="14" fill="#718096">Foto Galeri Upacara 4</text>
+  </g>
+</svg>

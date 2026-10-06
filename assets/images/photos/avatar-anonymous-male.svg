@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5efe6" />
+      <stop offset="100%" stop-color="#dfd2be" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#8c6f55" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bgGrad)" />
+  <circle cx="200" cy="200" r="180" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-dasharray="8 6" opacity="0.6"/>
+  <!-- Balinese Motif Silhouette Male -->
+  <g fill="#8c6f55" opacity="0.85" transform="translate(0, 10)">
+    <!-- Udeng / Headpiece -->
+    <path d="M160 115 C175 90 225 90 240 115 C255 125 245 140 200 135 C155 140 145 125 160 115 Z" fill="url(#goldGrad)"/>
+    <path d="M195 90 C198 70 202 70 205 90 Z" fill="url(#goldGrad)"/>
+    <!-- Head -->
+    <circle cx="200" cy="165" r="48" />
+    <!-- Shoulders / Body -->
+    <path d="M110 320 C110 245 150 225 200 225 C250 225 290 245 290 320 Z" />
+    <!-- Traditional Sash / Kamen Accent -->
+    <path d="M165 245 L235 245 L225 320 L175 320 Z" fill="url(#goldGrad)" opacity="0.6"/>
+  </g>
+</svg>
