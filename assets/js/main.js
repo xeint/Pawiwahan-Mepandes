@@ -745,12 +745,31 @@ function initRSVPSystem(config) {
     // Validasi format URL Google Sheets
     const isGoogleSheetsConfigured = googleSheetsUrl && googleSheetsUrl.startsWith('https://script.google.com/');
 
+    // Filter untuk membersihkan ucapan percobaan / test
+    function filterOutTest(list) {
+        if (!Array.isArray(list)) return [];
+        return list.filter(w => {
+            const n = (w.nama || '').trim().toLowerCase();
+            return n !== 'test' && !n.startsWith('test');
+        });
+    }
+
+    // Bersihkan cache test dari localStorage jika ada
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored && stored.toLowerCase().includes('"test"')) {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+    } catch (e) {}
+
     // Ambil data ucapan yang tersimpan lokal
     function getLocalWishes() {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
             try {
-                return JSON.parse(stored);
+                const parsed = JSON.parse(stored);
+                const filtered = filterOutTest(parsed);
+                if (filtered.length > 0) return filtered;
             } catch (e) {
                 console.error(e);
             }
@@ -759,18 +778,24 @@ function initRSVPSystem(config) {
     }
 
     function saveLocalWishes(wishes) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(filterOutTest(wishes)));
     }
 
     function renderWishes(wishes) {
         if (!wishesList) return;
 
-        if (!wishes || wishes.length === 0) {
+        const displayWishes = filterOutTest(wishes);
+        if (!displayWishes || displayWishes.length === 0) {
+            // Jika kosong, tampilkan ucapan default dari config
+            if (config.ucapanDefault && config.ucapanDefault.length > 0) {
+                renderWishes(config.ucapanDefault);
+                return;
+            }
             wishesList.innerHTML = '<p class="text-center text-muted" style="padding: 25px;">Belum ada ucapan doa. Jadilah yang pertama memberikan ucapan!</p>';
             return;
         }
 
-        wishesList.innerHTML = wishes.map(w => {
+        wishesList.innerHTML = displayWishes.map(w => {
             const initial = w.nama ? w.nama.charAt(0).toUpperCase() : '?';
             let badgeClass = 'hadir';
             if (w.kehadiran === 'Tidak Hadir') badgeClass = 'tidak-hadir';
@@ -808,8 +833,15 @@ function initRSVPSystem(config) {
                 .then(res => {
                     if (res && res.status === 'success' && Array.isArray(res.data)) {
                         console.log('✅ Komentar sinkron dengan Google Sheets. Jumlah:', res.data.length);
-                        saveLocalWishes(res.data);
-                        renderWishes(res.data);
+                        const cleanData = filterOutTest(res.data);
+                        if (cleanData.length > 0) {
+                            saveLocalWishes(cleanData);
+                            renderWishes(cleanData);
+                        } else {
+                            // Jika data di Google Sheets hanya berisi ucapan test, tampilkan ucapan default
+                            localStorage.removeItem(STORAGE_KEY);
+                            renderWishes(config.ucapanDefault || []);
+                        }
                     } else {
                         renderWishes(getLocalWishes());
                     }
