@@ -20,7 +20,7 @@ const UNDANGAN_CONFIG = {
         tanggalAcara: "2026-10-16T13:00:00+08:00", // Format ISO: YYYY-MM-DDTHH:mm:ss+08:00 (WITA)
         hariTanggalTeks: "Jumat, 16 Oktober 2026",
         waktuTeks: "13.00 WITA - Selesai",
-        tempat: "Gg. Arjuna, Wanasari, Kec. Tabanan, Kabupaten Tabanan, Bali 82181",
+        tempat: "Griya Tengah Wanasari, Banjar Wanasari Tengah, Ds. Wanasari Tabanan",
         mapsUrl: "https://maps.app.goo.gl/uCp737N8D53aaCRa6",
         mapsEmbedUrl: "https://maps.google.com/maps?q=-8.4874452,115.1352804&hl=id&z=17&output=embed",
         deskripsi: "Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir memberikan doa restu kepada kami.",
