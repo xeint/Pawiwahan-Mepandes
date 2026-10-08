@@ -8,10 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Inisialisasi Data dari Konfigurasi
     const config = window.UNDANGAN_CONFIG || {};
 
-    // 2. Baca Parameter Nama Tamu dari URL
+    // 2. Baca Parameter Nama Tamu dan Tanggal Khusus dari URL
     const urlParams = new URLSearchParams(window.location.search);
     const guestParam = urlParams.get('untuk') || urlParams.get('to') || urlParams.get('u') || urlParams.get('nama');
-    const guestName = guestParam ? decodeURIComponent(guestParam).trim() : 'Tamu Undangan';
+    const guestName = guestParam ? decodeURIComponent(guestParam).trim() : (window.DEFAULT_GUEST_NAME || 'Tamu Undangan');
+
+    // 2.1 Cek apakah Undangan Khusus Tanggal 15 (Kamis, 15 Oktober 2026)
+    // Berlaku otomatis untuk tamu "Adat Ngampel", parameter tgl=15, atau window.IS_TGL_15
+    const isTgl15 = urlParams.get('tgl') === '15' || 
+                    guestName.toLowerCase().includes('ngampel') || 
+                    window.IS_TGL_15 === true;
+
+    if (isTgl15) {
+        config.acara = config.acara || {};
+        config.acara.hariTanggalTeks = 'Kamis, 15 Oktober 2026';
+        config.acara.tanggalAcara = '2026-10-15T13:00:00+08:00';
+    }
 
     // Set nama tamu pada cover modal dan RSVP form
     const modalGuestNameEl = document.getElementById('modalGuestName');
@@ -20,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalGuestNameEl) {
         modalGuestNameEl.textContent = guestName;
     }
-    if (rsvpNamaEl && guestParam) {
+    if (rsvpNamaEl && (guestParam || window.DEFAULT_GUEST_NAME)) {
         rsvpNamaEl.value = guestName;
     }
 
@@ -141,6 +153,9 @@ function renderDynamicContent(config) {
     if (config.acara) {
         const elTgl = document.getElementById('acaraTanggal');
         if (elTgl && config.acara.hariTanggalTeks) elTgl.textContent = config.acara.hariTanggalTeks;
+
+        const heroDate = document.getElementById('heroDate') || document.querySelector('.hero-date');
+        if (heroDate && config.acara.hariTanggalTeks) heroDate.textContent = config.acara.hariTanggalTeks;
 
         const elWaktu = document.getElementById('acaraWaktu');
         if (elWaktu && config.acara.waktuTeks) elWaktu.textContent = config.acara.waktuTeks;
@@ -745,19 +760,22 @@ function initRSVPSystem(config) {
     // Validasi format URL Google Sheets
     const isGoogleSheetsConfigured = googleSheetsUrl && googleSheetsUrl.startsWith('https://script.google.com/');
 
-    // Filter untuk membersihkan ucapan percobaan / test
+    // Filter untuk membersihkan ucapan dummy test awal
     function filterOutTest(list) {
         if (!Array.isArray(list)) return [];
         return list.filter(w => {
             const n = (w.nama || '').trim().toLowerCase();
-            return n !== 'test' && !n.startsWith('test');
+            const p = (w.pesan || w.ucapan || '').trim().toLowerCase();
+            // Hanya buang baris dummy test awal yang spesifik: nama 'test' dan pesan 'langgeng'
+            if (n === 'test' && p === 'langgeng') return false;
+            return true;
         });
     }
 
-    // Bersihkan cache test dari localStorage jika ada
+    // Bersihkan cache test lama jika ada
     try {
         const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored && stored.toLowerCase().includes('"test"')) {
+        if (stored && stored.toLowerCase().includes('"test"') && stored.toLowerCase().includes('"langgeng"')) {
             localStorage.removeItem(STORAGE_KEY);
         }
     } catch (e) {}
@@ -781,10 +799,19 @@ function initRSVPSystem(config) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(filterOutTest(wishes)));
     }
 
+    function updateCountBadge(count) {
+        const wishesCountText = document.getElementById('wishesCountText');
+        if (wishesCountText) {
+            wishesCountText.textContent = count > 0 ? `${count} Doa Restu` : 'Belum ada ucapan';
+        }
+    }
+
     function renderWishes(wishes) {
         if (!wishesList) return;
 
         const displayWishes = filterOutTest(wishes);
+        updateCountBadge(displayWishes.length);
+
         if (!displayWishes || displayWishes.length === 0) {
             // Jika kosong, tampilkan ucapan default dari config
             if (config.ucapanDefault && config.ucapanDefault.length > 0) {
@@ -822,7 +849,13 @@ function initRSVPSystem(config) {
     }
 
     // 1. Muat Ucapan Awal (Live dari Google Sheets dengan Cache Buster)
-    function loadInitialWishes() {
+    function loadInitialWishes(isSilent = false) {
+        const refreshIcon = document.getElementById('refreshIcon');
+        const wishesCountText = document.getElementById('wishesCountText');
+
+        if (refreshIcon) refreshIcon.classList.add('fa-spin');
+        if (!isSilent && wishesCountText) wishesCountText.textContent = 'Memperbarui doa restu...';
+
         if (isGoogleSheetsConfigured) {
             // Pasang timestamp nocache agar browser tidak menggunakan cache lama
             const noCacheUrl = googleSheetsUrl + (googleSheetsUrl.includes('?') ? '&' : '?') + 'nocache=' + Date.now();
@@ -831,6 +864,7 @@ function initRSVPSystem(config) {
             fetch(noCacheUrl)
                 .then(res => res.json())
                 .then(res => {
+                    if (refreshIcon) refreshIcon.classList.remove('fa-spin');
                     if (res && res.status === 'success' && Array.isArray(res.data)) {
                         console.log('✅ Komentar sinkron dengan Google Sheets. Jumlah:', res.data.length);
                         const cleanData = filterOutTest(res.data);
@@ -838,8 +872,6 @@ function initRSVPSystem(config) {
                             saveLocalWishes(cleanData);
                             renderWishes(cleanData);
                         } else {
-                            // Jika data di Google Sheets hanya berisi ucapan test, tampilkan ucapan default
-                            localStorage.removeItem(STORAGE_KEY);
                             renderWishes(config.ucapanDefault || []);
                         }
                     } else {
@@ -847,16 +879,34 @@ function initRSVPSystem(config) {
                     }
                 })
                 .catch(err => {
+                    if (refreshIcon) refreshIcon.classList.remove('fa-spin');
                     console.warn('⚠️ Gagal mengambil live dari Google Sheets, menggunakan data cache lokal.', err);
                     renderWishes(getLocalWishes());
                 });
         } else {
+            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
             console.log('ℹ️ Google Sheets URL belum diisi di config.js. Menggunakan mode penyimpanan lokal browser.');
             renderWishes(getLocalWishes());
         }
     }
 
-    loadInitialWishes();
+    // Panggil saat halaman dibuka
+    loadInitialWishes(false);
+
+    // Tombol refresh manual
+    const btnRefresh = document.getElementById('btnRefreshWishes');
+    if (btnRefresh) {
+        btnRefresh.addEventListener('click', () => {
+            loadInitialWishes(false);
+        });
+    }
+
+    // Auto-sync saat tab dibuka kembali oleh pengguna
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            loadInitialWishes(true);
+        }
+    });
 
     // 2. Kirim Ucapan Baru
     if (form) {
@@ -926,7 +976,15 @@ function initRSVPSystem(config) {
                     submitBtn.innerHTML = origBtnText;
                 }
 
-                form.reset();
+                // Reset field pesan saja jika nama tamu dikunci dari URL
+                const rsvpPesan = document.getElementById('rsvpPesan');
+                if (rsvpPesan) rsvpPesan.value = '';
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const guestParam = urlParams.get('untuk') || urlParams.get('to') || urlParams.get('u') || urlParams.get('nama');
+                if (!guestParam && !window.DEFAULT_GUEST_NAME) {
+                    form.reset();
+                }
 
                 if (alertSuccess) {
                     alertSuccess.style.display = 'block';
@@ -934,6 +992,11 @@ function initRSVPSystem(config) {
                         alertSuccess.style.display = 'none';
                     }, 4000);
                 }
+
+                // Sinkronkan kembali dari Google Sheets setelah 1.5 detik
+                setTimeout(() => {
+                    loadInitialWishes(true);
+                }, 1500);
             }
         });
     }

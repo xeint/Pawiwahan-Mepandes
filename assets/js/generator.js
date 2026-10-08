@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const nama = document.getElementById('guestName').value.trim();
             const phone = document.getElementById('guestPhone')?.value.trim() || '';
+            const tgl = document.getElementById('eventDateSelect')?.value || '16';
             const template = document.getElementById('templateSelect').value;
             const useIntro = document.querySelector('input[name="useIntro"]:checked')?.value === 'ya';
             const baseUrl = customBaseUrlInput?.value.trim() || autoBaseUrl;
@@ -65,10 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!nama) return;
 
             // Generate Link
-            const linkUndangan = generateLink(baseUrl, nama);
+            const linkUndangan = generateLink(baseUrl, nama, tgl);
 
             // Generate Pesan
-            const pesanText = generateMessage(nama, linkUndangan, template, useIntro);
+            const pesanText = generateMessage(nama, linkUndangan, template, useIntro, tgl);
 
             // Tampilkan Output
             previewText.textContent = pesanText;
@@ -99,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const rawNames = document.getElementById('bulkNames').value.trim();
+            const tgl = document.getElementById('bulkEventDateSelect')?.value || '16';
             const template = document.getElementById('bulkTemplateSelect').value;
             const useIntro = document.querySelector('input[name="bulkUseIntro"]:checked')?.value === 'ya';
             const baseUrl = customBaseUrlInput?.value.trim() || autoBaseUrl;
@@ -112,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nameList.length === 0) return;
 
             currentBulkData = nameList.map((nama, idx) => {
-                const link = generateLink(baseUrl, nama);
-                const pesan = generateMessage(nama, link, template, useIntro);
+                const link = generateLink(baseUrl, nama, tgl);
+                const pesan = generateMessage(nama, link, template, useIntro, tgl);
                 return {
                     no: idx + 1,
                     nama: nama,
@@ -176,7 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Generate Link Undangan dengan parameter URL yang rapi
  */
-function generateLink(baseUrl, nama) {
+/**
+ * Generate Link Undangan dengan parameter URL yang rapi
+ */
+function generateLink(baseUrl, nama, tgl) {
     let cleanBase = baseUrl.trim();
 
     // Jika protokol file:/// lokal dan belum ada nama file index.html
@@ -187,6 +192,9 @@ function generateLink(baseUrl, nama) {
 
     const params = new URLSearchParams();
     params.set('untuk', nama);
+    if (tgl === '15') {
+        params.set('tgl', '15');
+    }
 
     const separator = cleanBase.includes('?') ? '&' : '?';
     return `${cleanBase}${separator}${params.toString()}`;
@@ -195,21 +203,25 @@ function generateLink(baseUrl, nama) {
 /**
  * Generate Pesan WhatsApp berdasarkan template yang dipilih
  */
-function generateMessage(nama, link, template, useIntro) {
+function generateMessage(nama, link, template, useIntro, tgl) {
     if (!useIntro) {
         return link;
     }
 
+    const tglInfo = (tgl === '15' || (nama && nama.toLowerCase().includes('ngampel')))
+        ? ' pada hari Kamis, 15 Oktober 2026'
+        : '';
+
     switch (template) {
         case 'bali':
-            return `Om Swastyastu,\n\nKepada Yth. Bapak/Ibu/Saudara/i\n*${nama}*\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri Upacara Manusa Yadnya Pawiwahan & Mepandes kami.\n\nUntuk info selengkapnya mengenai waktu dan lokasi acara, silakan kunjungi tautan undangan kami berikut:\n${link}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.\n\nMatur Suksma.\nOm Shanti Shanti Shanti Om`;
+            return `Om Swastyastu,\n\nKepada Yth. Bapak/Ibu/Saudara/i\n*${nama}*\n\nTanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri Upacara Manusa Yadnya Pawiwahan & Mepandes kami${tglInfo}.\n\nUntuk info selengkapnya mengenai waktu dan lokasi acara, silakan kunjungi tautan undangan kami berikut:\n${link}\n\nMerupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.\n\nMatur Suksma.\nOm Shanti Shanti Shanti Om`;
 
         case 'santai':
-            return `Halo *${nama}*! 👋\n\nKami mengundang kamu untuk hadir di acara Upacara Pawiwahan & Mepandes kami.\n\nYuk buka detail acaranya di link undangan ini ya:\n${link}\n\nKehadiran dan doa restumu sangat berarti untuk kami. Sampai jumpa di hari bahagia kami! 🙏✨`;
+            return `Halo *${nama}*! 👋\n\nKami mengundang kamu untuk hadir di acara Upacara Pawiwahan & Mepandes kami${tglInfo}.\n\nYuk buka detail acaranya di link undangan ini ya:\n${link}\n\nKehadiran dan doa restumu sangat berarti untuk kami. Sampai jumpa di hari bahagia kami! 🙏✨`;
 
         case 'formal':
         default:
-            return `Kepada Yth. Bapak/Ibu/Saudara/i\n*${nama}*\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk dapat menghadiri Upacara Manusa Yadnya Pawiwahan & Mepandes kami.\n\nDetail acara dan lokasi dapat diakses melalui link undangan berikut:\n${link}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.\n\nTerima Kasih.`;
+            return `Kepada Yth. Bapak/Ibu/Saudara/i\n*${nama}*\n\nTanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i untuk dapat menghadiri Upacara Manusa Yadnya Pawiwahan & Mepandes kami${tglInfo}.\n\nDetail acara dan lokasi dapat diakses melalui link undangan berikut:\n${link}\n\nMerupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.\n\nTerima Kasih.`;
     }
 }
 
