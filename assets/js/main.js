@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const guestName = guestParam ? decodeURIComponent(guestParam).trim() : (window.DEFAULT_GUEST_NAME || 'Tamu Undangan');
 
     // 2.1 Cek apakah Undangan Khusus Tanggal 15 (Kamis, 15 Oktober 2026)
-    // Berlaku otomatis untuk tamu "Adat Ngampel", parameter tgl=15, atau window.IS_TGL_15
+    // Berlaku otomatis untuk tamu "Adat Aktif", "Adat Ngampel", parameter tgl=15, atau window.IS_TGL_15
     const isTgl15 = urlParams.get('tgl') === '15' || 
+                    guestName.toLowerCase().includes('aktif') || 
                     guestName.toLowerCase().includes('ngampel') || 
                     window.IS_TGL_15 === true;
 

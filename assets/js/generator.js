@@ -208,7 +208,7 @@ function generateMessage(nama, link, template, useIntro, tgl) {
         return link;
     }
 
-    const tglInfo = (tgl === '15' || (nama && nama.toLowerCase().includes('ngampel')))
+    const tglInfo = (tgl === '15' || (nama && (nama.toLowerCase().includes('aktif') || nama.toLowerCase().includes('ngampel'))))
         ? ' pada hari Kamis, 15 Oktober 2026'
         : '';
 

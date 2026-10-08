@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <base href="../">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pawiwahan & Mepandes - Adat Aktif</title>
+
+    <!-- Favicon / Logo Tab & Taskbar -->
+    <link rel="icon" type="image/jpeg" href="assets/images/logo-xeint.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="assets/images/logo-xeint.jpg">
+    <link rel="apple-touch-icon" href="assets/images/og-image.jpg">
+
+    <!-- Meta OpenGraph untuk WhatsApp, Facebook, Telegram -->
+    <meta property="og:site_name" content="Undangan Digital Bali">
+    <meta property="og:title" content="Undangan Pawiwahan & Mepandes - Adat Aktif">
+    <meta property="og:description" content="Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    <meta property="og:image:secure_url" content="assets/images/og-image.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1000">
+    <meta property="og:image:height" content="1000">
+    <meta property="og:image:alt" content="Foto Undangan Pawiwahan & Mepandes Gus Yogi & Dayu Intan">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Undangan Pawiwahan & Mepandes - Manusa Yadnya">
+    <meta name="twitter:description" content="Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu.">
+    <meta name="twitter:image" content="assets/images/og-image.jpg">
+
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="modal-open">
+
+    <!-- ====================================================================
+         BACKGROUND AUDIO & FLOATING CONTROLLER
+         ==================================================================== -->
+    <audio id="bgMusic" preload="auto">
+        <source src="assets/audio/undangan digital jikogik.wav" type="audio/wav">
+    </audio>
+    <div id="floatingAudioBtn" title="Putar / Hentikan Musik">
+        <i class="fas fa-volume-mute"></i>
+    </div>
+
+    <!-- ====================================================================
+         COVER MODAL (SAMPUL PEMBUKA UNDANGAN)
+         ==================================================================== -->
+    <div id="coverModal">
+        <div class="modal-container">
+            <!-- Balinese Corner Ornaments -->
+            <img src="assets/images/ornaments/modal-img-left.png" alt="Ornamen Kiri" class="modal-ornament-top-left">
+            <img src="assets/images/ornaments/modal-img-right.png" alt="Ornamen Kanan" class="modal-ornament-bottom-right">
+
+            <!-- Framed Photo with Floating Leaves -->
+            <div class="modal-foto">
+                <img src="assets/images/ornaments/daun-2.png" alt="Daun Bali" class="leaf-left">
+                <img src="assets/images/photos/edit-7478.JPEG" alt="Foto Utama" class="frame-img">
+                <img src="assets/images/ornaments/daun-1.png" alt="Daun Bali" class="leaf-right">
+            </div>
+
+            <p class="modal-title-small">The Wedding of</p>
+            <h1 class="modal-event-name">Gus Yogi & Dayu Intan</h1>
+
+            <div class="modal-recipient-box">
+                <p>Kepada Bapak/Ibu/Saudara/i:</p>
+                <h2 class="modal-guest-name" id="modalGuestName">Adat Aktif</h2>
+                <p style="font-size: 0.85rem; color: #8c6f55; margin-top: 4px;">Di Tempat</p>
+            </div>
+
+            <button type="button" class="btn-open-invitation" id="btnOpenInvitation">
+                <i class="fas fa-envelope-open-text"></i>
+                <span>Buka Undangan</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         HERO HEADER
+         ==================================================================== -->
+    <header class="hero-header">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <p class="hero-subtitle-top">Undangan Upacara Manusa Yadnya</p>
+            <h1 class="hero-title">Pawiwahan & Mepandes</h1>
+            <img src="assets/images/ornaments/ornament-leaf1.png" alt="Ornamen Bali" class="ornament-divider">
+            <p class="hero-date" id="heroDate">Kamis, 15 Oktober 2026</p>
+        </div>
+        <div class="scroll-down-hint" title="Gulir ke bawah">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+         SECTION: INTRO & PESERTA METATAH / MEMPELAI
+         ==================================================================== -->
+    <section class="section-intro" id="intro">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+            <div data-aos="fade-up">
+                <h2 class="greeting-text">Om Swastyastu</h2>
+                <p class="intro-desc">
+                    Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa / Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i pada acara Pawiwahan lan mepandes putra dan putri kami:
+                </p>
+            </div>
+
+            <!-- Peserta Cards Container (Dinamis dari config.js) -->
+            <div class="peserta-wrapper" id="pesertaContainer">
+                <!-- Fallback Static Items jika JS belum berjalan -->
+                <div class="peserta-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="peserta-foto-box">
+                        <img src="assets/images/ornaments/daun-2.png" alt="Daun" class="leaf-1">
+                        <img src="assets/images/photos/avatar-anonymous-male.svg" alt="Nama Peserta 1" class="peserta-img">
+                        <img src="assets/images/ornaments/daun-1.png" alt="Daun" class="leaf-2">
+                    </div>
+                    <h3 class="peserta-name">Ida Bagus Yogi Adnyana Putra, S. Pd</h3>
+                    <p class="peserta-info">Putra dari Pasangan Ida Bagus Swabhawa & Anak Agung Rai Puspawati</p>
+                </div>
+            </div>
+
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider" data-aos="fade-up">
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: SLOKA SUCI / BHAGAVAD GITA
+         ==================================================================== -->
+    <section class="section-sloka">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <div class="sloka-box" data-aos="zoom-in" data-aos-duration="1000">
+                <i class="fas fa-om fa-2x" style="color: var(--gold); margin-bottom: 15px;"></i>
+                <p class="sloka-quote">
+                    "Devan bhavayatanena te deva bhavayantu vah parasparam bhavayantah sreyah param avapsyatha"
+                </p>
+                <h4 class="sloka-source">â€” Bhagavad Gita 3:11 â€”</h4>
+                <p class="sloka-arti">
+                    Dengan ini (Yadnya), kami berbakti kepada Hyang Widhi dan dengan ini pula Hyang Widhi memelihara dan mengasihi kamu. Dengan saling memelihara satu sama lain, kamu akan mencapai kebaikan yang maha tinggi.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: WAKTU & TEMPAT ACARA
+         ==================================================================== -->
+    <section class="section-acara" id="acara">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title" data-aos="fade-up">Waktu & Tempat</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+
+            <div class="acara-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="acara-item">
+                    <h3 class="acara-item-title">Hari & Tanggal</h3>
+                    <p class="acara-item-detail" id="acaraTanggal">Kamis, 15 Oktober 2026</p>
+                </div>
+
+                <div class="acara-divider"></div>
+
+                <div class="acara-item">
+                    <h3 class="acara-item-title">Waktu Acara</h3>
+                    <p class="acara-item-detail" id="acaraWaktu">13.00 WITA - Selesai</p>
+                </div>
+
+                <div class="acara-divider"></div>
+
+                <div class="acara-item">
+                    <h3 class="acara-item-title">Bertempat di</h3>
+                    <p class="acara-alamat" id="acaraTempat">Griya Tengah Wanasari, Banjar Wanasari Tengah, Ds. Wanasari Tabanan</p>
+                </div>
+
+                <div class="acara-btn-group">
+                    <a href="https://maps.app.goo.gl/uCp737N8D53aaCRa6" id="btnGoogleMaps" target="_blank" rel="noopener noreferrer" class="btn-custom">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Buka Google Maps</span>
+                    </a>
+                    <a href="#" id="btnAddToCalendar" target="_blank" rel="noopener noreferrer" class="btn-custom btn-outline">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Simpan ke Kalender</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: COUNTDOWN TIMER
+         ==================================================================== -->
+    <section class="section-countdown">
+        <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title" data-aos="fade-up">Menuju Hari Bahagia</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+
+            <div class="countdown-container" data-aos="zoom-in" data-aos-delay="200">
+                <div class="countdown-card">
+                    <div class="countdown-number" id="cdDays">00</div>
+                    <div class="countdown-label">Hari</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="cdHours">00</div>
+                    <div class="countdown-label">Jam</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="cdMinutes">00</div>
+                    <div class="countdown-label">Menit</div>
+                </div>
+                <div class="countdown-card">
+                    <div class="countdown-number" id="cdSeconds">00</div>
+                    <div class="countdown-label">Detik</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: PHOTO GALLERY SLIDER (PEEK / CENTERED CAROUSEL)
+         ==================================================================== -->
+    <section class="section-gallery" id="gallery">
+        <div class="container gallery-container" style="max-width: 1000px; margin: 0 auto; padding: 0 10px;">
+            <h2 class="section-title" data-aos="fade-up">Galeri Momen</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+
+            <div class="gallery-slider-wrapper" data-aos="zoom-in" data-aos-delay="150">
+                <!-- Navigation Prev/Next Arrows -->
+                <button class="slider-btn slider-btn-prev" id="galleryPrevBtn" aria-label="Foto Sebelumnya">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn slider-btn-next" id="galleryNextBtn" aria-label="Foto Selanjutnya">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <!-- Slider Viewport & Track -->
+                <div class="gallery-slider-viewport" id="galleryViewport">
+                    <div class="gallery-slider-track" id="galleryTrack">
+                        <!-- Slide items will be rendered dynamically by JavaScript from config.galeri -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls: Counter & Dots (di luar foto agar foto bersih) -->
+            <div class="gallery-controls-bottom" data-aos="fade-up" data-aos-delay="200">
+                <div class="slider-counter-badge">
+                    <i class="far fa-images"></i> <span id="galleryCurrentIndex">1</span> / <span id="galleryTotalCount">15</span>
+                </div>
+                <!-- Dots Pagination Navigation -->
+                <div class="gallery-dots-container" id="galleryDots">
+                    <!-- Dynamic dots rendered by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal for Gallery -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev"><i class="fas fa-chevron-left"></i></button>
+        <div class="lightbox-img-wrapper">
+            <img src="" alt="Popup Preview" id="lightboxImg">
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- ====================================================================
+         SECTION: VIDEO MOMEN / CINEMATIC
+         ==================================================================== -->
+    <section class="section-video" id="video">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title" data-aos="fade-up">Video Momen</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+
+            <div class="video-container-box" data-aos="zoom-in" data-aos-delay="150">
+                <!-- Floating Leaves -->
+                <img src="assets/images/ornaments/daun-1.png" alt="Daun Bali" class="video-leaf-top-right">
+                <img src="assets/images/ornaments/daun-2.png" alt="Daun Bali" class="video-leaf-bottom-left">
+
+                <div class="video-wrapper" id="videoWrapper">
+                    <video id="momenVideo" class="video-player" controls preload="metadata" poster="assets/images/photos/NAS_7364.JPEG" playsinline>
+                        <source src="assets/videos/Video Prewed.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung pemutar video.
+                    </video>
+                    <div class="video-play-overlay" id="videoPlayOverlay">
+                        <button type="button" class="btn-video-play" id="btnVideoPlay" aria-label="Putar Video">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <span class="video-play-label">Putar Video Momen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: RSVP & BUKU UCAPAN (WISHES WALL)
+         ==================================================================== -->
+    <section class="section-rsvp" id="rsvp">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title" data-aos="fade-up">Mohon Doa Restu & RSVP</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+
+            <div class="rsvp-box" data-aos="fade-up" data-aos-delay="200">
+                <div class="rsvp-alert success" id="rsvpAlertSuccess">
+                    <i class="fas fa-check-circle"></i> Terima kasih atas doa restu dan konfirmasi kehadiran Anda!
+                </div>
+
+                <form id="rsvpForm">
+                    <div class="rsvp-form-group">
+                        <label for="rsvpNama">Nama Lengkap</label>
+                        <input type="text" id="rsvpNama" class="rsvp-input" placeholder="Masukkan nama Anda" required>
+                    </div>
+
+                    <div class="rsvp-form-group">
+                        <label>Konfirmasi Kehadiran</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="kehadiran" value="Hadir" checked> Hadir
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kehadiran" value="Tidak Hadir"> Tidak Hadir
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="kehadiran" value="Masih Ragu"> Masih Ragu
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="rsvp-form-group">
+                        <label for="rsvpPesan">Ucapan Doa & Pesan</label>
+                        <textarea id="rsvpPesan" rows="4" class="rsvp-textarea" placeholder="Tuliskan ucapan dan doa restu Anda di sini..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-rsvp-submit">
+                        <i class="fas fa-paper-plane"></i> Kirim Doa & Ucapan
+                    </button>
+                </form>
+            </div>
+
+            <!-- Wishes Header & Refresh Bar -->
+            <div class="wishes-controls-bar" data-aos="fade-up" data-aos-delay="250" style="display: flex; justify-content: space-between; align-items: center; max-width: 680px; margin: 25px auto 12px; padding: 0 5px;">
+                <span class="wishes-count-badge" id="wishesCountBadge" style="font-size: 0.88rem; color: var(--primary-color); font-weight: 600;">
+                    <i class="fas fa-comments"></i> <span id="wishesCountText">Memuat doa restu...</span>
+                </span>
+                <button type="button" class="btn-refresh-wishes" id="btnRefreshWishes" title="Segarkan Ucapan Terbaru" style="background: rgba(255,255,255,0.9); border: 1.5px solid var(--gold); border-radius: 20px; padding: 5px 15px; font-size: 0.82rem; color: var(--primary-color); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(140,111,85,0.15); transition: all 0.25s;">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> <span>Segarkan</span>
+                </button>
+            </div>
+
+            <!-- List of Wishes -->
+            <div class="wishes-list-container" id="wishesList" data-aos="fade-up" data-aos-delay="300">
+                <!-- Populated dynamically via main.js -->
+            </div>
+
+            <p class="wishes-scroll-hint" id="wishesScrollHint" data-aos="fade-up" style="font-size: 0.84rem; color: var(--text-muted); margin-top: 14px; text-align: center;">
+                <i class="fas fa-arrows-alt-v" style="color: var(--gold); margin-right: 4px;"></i> Gulir ke bawah untuk membaca ucapan doa lainnya
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         SECTION: AMPLOP DIGITAL (TANDA KASIH)
+         ==================================================================== -->
+    <section class="section-amplop" id="amplop">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title" data-aos="fade-up">Tanda Kasih (Amplop Digital)</h2>
+            <img src="assets/images/ornaments/ornament-leaf2.png" alt="Ornamen Bali" class="ornament-divider small" data-aos="fade-up">
+            <p style="max-width: 650px; margin: 0 auto 20px; font-style: italic; color: var(--text-muted);" data-aos="fade-up">
+                Tanpa mengurangi rasa hormat, bagi Bapak/Ibu/Saudara/i yang ingin memberikan tanda kasih secara cashless, dapat melalui rekening berikut:
+            </p>
+
+            <div class="amplop-grid" id="rekeningContainer">
+                <!-- Populated dynamically from config.js -->
+                <div class="atm-card" data-aos="fade-up">
+                    <div class="atm-header">
+                        <span class="atm-bank-name">Bank Mandiri</span>
+                        <div class="atm-chip"></div>
+                    </div>
+                    <div class="atm-number" id="rek1">1750002619608</div>
+                    <div class="atm-holder">IDA AYU INTAN KARTIKA DEWI</div>
+                    <button class="btn-salin-rek" onclick="copyRekening('rek1', this)">
+                        <i class="fas fa-copy"></i> <span>Salin No Rekening</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+         FOOTER & PENUTUP
+         ==================================================================== -->
+    <footer class="main-footer" data-aos="fade-up">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <p style="font-style: italic; max-width: 600px; margin: 0 auto 25px;">
+                Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.
+            </p>
+            <h3 class="footer-penutup">Om Shanti Shanti Shanti Om</h3>
+            <p style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 20px;">Matur Suksma</p>
+
+            <div class="footer-socials">
+                <a href="https://instagram.com/bayukrsnda._" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/+6285792165758" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+
+            <p class="footer-copy"> Invitation by Bayu Krisnanda</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        window.DEFAULT_GUEST_NAME = 'Adat Aktif';
+        window.IS_TGL_15 = true;
+    </script>
+    <script src="config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
